@@ -1,0 +1,68 @@
+/* General */
+
+:root {
+    --primary: #006400 ;
+    --secondary: #50c878;
+    --background: #dcdcdc;
+}
+
+body {
+    color: var(--secondary);
+    background-color: var(--background);
+}
+
+/* Controls */
+
+.controls td {
+    padding: 5px;
+}
+
+.input-width,
+.input-height {
+    background-color: var(--secondary);
+    color: var(--background);
+    border: var(--primary);
+}
+
+.input-width:focus,
+.input-height:focus {
+    outline: none;
+}
+
+.input-linear-start-color,
+.input-linear-end-color,
+.input-radial-color {
+    background-color: var(--background);
+}
+  
+.btn-generate-wallpaper {
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    background-color: var(--background); 
+    color: var(--secondary); 
+    border: 2px solid var(--secondary);
+}
+
+.btn-generate-wallpaper:hover {
+    background-color: var(--secondary); 
+    color: var(--background); 
+    border: 2px solid var(--secondary);
+}
+
+/* Wallpaper */
+
+.wallpaper {
+    margin: 0px;
+    position: absolute;
+    top: 25%;
+    left: 55%;
+    border: 5px solid var(--secondary);
+    width: 800px;
+    max-width: 800px;
+    max-height: 450px;
+}
