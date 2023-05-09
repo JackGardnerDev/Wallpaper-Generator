@@ -2,79 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Default Web Skeleton">
+    <meta name="description" content="Wallpaper Generator">
     <meta name="keywords" content="HTML, CSS, JavaScript">
     <meta name="author" content="Jack Gardner">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Default</title>
+    <title>Wallpaper Generator</title>
     <link rel="icon" type="image/x-icon" href="assets/imgs/favicon.png">
-    <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/main.js" defer></script>
-    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-    <py-config>
-        packages = [
-         "pyaudio",
-         "playsound"
-        ]
-      </py-config>
-    
-    <py-script>
+	<div class="heading">Wallpaper Generator</div>
 
-        import os
-        import time
-        import pyaudio
-        import speech_recognition as sr
-        import playsound 
-        from gtts import gTTS
-        import openai
+	<table class="controls">
+		<tr>
+			<td>Width:</td>
+			<td><input type="number" class="input-width" value="1920"> PX</td>
+		</tr>
+		<tr>
+			<td>Height:</td>
+			<td><input type="number" class="input-height" value="1080"> PX</td>
+		</tr>
+		<tr>
+			<td>Linear Start Color:</td>
+			<td><input type="color" class="input-linear-start-color" value="#00b3ff"></td>
+		</tr>
+		<tr>
+			<td>Linear End Color:</td>
+			<td><input type="color" class="input-linear-end-color" value="#004a8f"></td>
+		</tr>
+		<tr>
+			<td>Radial Color:</td>
+			<td><input type="color" class="input-radial-color" value="#8c00ff"></td>
+		</tr>
+		<tr>
+			<td><button type="button" class="btn-generate-wallpaper">Generate Wallpaper</button></td>
+		</tr>
+		<tr>
+			<td><button type="button" class="btn-generate-wallpaper" onClick="window.location.reload();">Change Radial</button></td>
+		</tr>
+	</table>
 
-        api_key = "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"
-
-        lang ='en'
-
-        openai.api_key = api_key
-
-        guy = ""
-
-        while True:
-            def get_adio():
-                r = sr.Recognizer()
-                with sr.Microphone(device_index=1) as source:
-                    audio = r.listen(source)
-                    said = ""
-
-                    try:
-                        said = r.recognize_google(audio)
-                        print(said)
-                        global guy 
-                        guy = said
-                        
-                        if "Athena" in said:
-                            words = said.split()
-                            new_string = ' '.join(words[1:])
-                            print(new_string) 
-                            completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content":said}])
-                            text = completion.choices[0].message.content
-                            speech = gTTS(text = text, lang=lang, slow=False, tld="com.au")
-                            speech.save("welcome.mp3")
-                            playsound.playsound("welcome.mp3")
-                            
-                    except Exception:
-                        print("Exception")
-
-                return said
-
-            if "stop" in guy:
-                break
-
-            get_adio()
-
-    </py-script>
+	<canvas class="wallpaper" width="1920" height="1080"></canvas>
     
 </body>
 </html>
